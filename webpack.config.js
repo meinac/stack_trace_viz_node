@@ -18,6 +18,16 @@ module.exports = function(webpackEnv) {
         {
           test: /\.css$/,
           use: ["style-loader", "css-loader"]
+        },
+        {
+          test: /\.js$/,
+          loader: 'string-replace-loader',
+          options: {
+            multiple: [
+              { search: /<%(?:=|-)?/g, replace: '{%' },
+              { search: /%>/g, replace: '%}' }
+            ]
+          }
         }
       ]
     },
@@ -25,6 +35,7 @@ module.exports = function(webpackEnv) {
       new HtmlWebPackPlugin(
         Object.assign(
           {
+            inject: "body",
             template: "./src/index.html",
             filename: "./index.html",
             trace_data: isEnvProduction ? "<%= trace_data %>" : fs.readFileSync("data/test.json", "utf-8")
