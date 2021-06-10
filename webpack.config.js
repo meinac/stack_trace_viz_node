@@ -50,8 +50,6 @@ module.exports = function(webpackEnv) {
       ),
       isEnvProduction && new HtmlWebpackInlineSourcePlugin(HtmlWebPackPlugin),
     ].filter(Boolean),
-    output: {
-      publicPath: "./"
-    }
+    output: (isEnvProduction ? { publicPath: "./" } : {})
   };
 }
