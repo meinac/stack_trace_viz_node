@@ -1,0 +1,25 @@
+ul {
+  list-style: none;
+  text-align: left;
+  padding: 0;
+}
+
+ul > li > .span-info {
+  padding: 10px;
+}
+
+ul > li.success {
+  background-color: #afff75;
+}
+
+ul > li.exception {
+  background-color: #ff7878;
+}
+
+ul > li.success > .span-info {
+  border: 2px solid #6ff76d;
+}
+
+ul > li.exception > .span-info {
+  border: 2px solid #d65331;
+}

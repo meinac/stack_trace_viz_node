@@ -1,0 +1,13 @@
+.top-bar {
+  background-color: #563d7c;
+  color: #fff;
+  min-height: 4rem;
+}
+
+header > form > div.form-group {
+  margin-bottom: 0;
+}
+
+.form-group > label {
+  margin-left: 15px;
+}

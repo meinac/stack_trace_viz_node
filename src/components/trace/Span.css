@@ -1,0 +1,60 @@
+.span-info {
+  display: table;
+  width: 100%;
+}
+
+.span-info > .span-details {
+  border-top: 2px solid #46b3c1;
+  width: 100%;
+  display: table;
+}
+
+.span-info > .span-basic > .nested-spans-button {
+  margin-right: 5px;
+  background-color: Transparent;
+  border: none;
+  outline: none;
+}
+
+.span-info > .span-basic > .switch-details-button {
+  margin-right: 5px;
+  background-color: Transparent;
+  border: none;
+  outline: none;
+}
+
+.span-details {
+  float: left;
+}
+
+.span-details > table {
+  width: 100%;
+}
+
+.span-details > table > tr > td {
+  padding: 5px;
+}
+
+.span-details > table > tr > td.detail-key {
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.span-details > table > tr > td > table {
+  width: 100%;
+}
+
+.span-details > table > tr > td > table > tr {
+  width: 100%;
+}
+
+.span-details > table > tr > td > table > tr > td {
+  border-bottom: 1px dotted;
+}
+
+.span-details > table > tr > td > table > tr > td.nested-table-key {
+  font-weight: bold;
+  padding-right: 10px;
+  white-space: nowrap;
+  width: 1px;
+}

@@ -1,0 +1,15 @@
+.trace-table {
+  margin-top: 10px;
+}
+
+.trace-table > label {
+  margin-right: 5px;
+}
+
+.file-path-column {
+  text-align: left;
+}
+
+.description-column {
+  text-align: left;
+}

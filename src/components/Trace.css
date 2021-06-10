@@ -1,0 +1,12 @@
+.control-buttons {
+  margin: 20px auto;
+  display: table;
+}
+
+.control-buttons > div {
+  float: left;
+}
+
+.control-buttons > .back-button {
+  margin-left: 10px;
+}

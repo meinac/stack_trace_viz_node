@@ -1,0 +1,17 @@
+.trace-card {
+  text-align: left;
+  border-bottom: 1px solid #999966;
+  width: 100%;
+}
+
+.trace-card > tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.trace-card > tr > td {
+  padding: 15px;
+}
+
+.trace-card > tr > td.header {
+  font-weight: bold;
+}
