@@ -1,5 +1,6 @@
 const fs = require("fs");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
 module.exports = function(webpackEnv) {
   const isEnvProduction = webpackEnv.production;
@@ -22,12 +23,35 @@ module.exports = function(webpackEnv) {
     },
     plugins: [
       new HtmlWebPackPlugin(
-        {
-          template: "./src/index.html",
-          filename: "./index.html",
-          trace_data: isEnvProduction ? "<%= trace_data %>" : fs.readFileSync("data/test.json", "utf-8")
-        },
+        Object.assign(
+          {
+            template: "./src/index.html",
+            filename: "./index.html",
+            trace_data: isEnvProduction ? "<%= trace_data %>" : fs.readFileSync("data/test.json", "utf-8")
+          },
+          isEnvProduction
+            ? {
+                inlineSource: ".(js|css)$",
+                minify: {
+                  removeComments: true,
+                  collapseWhitespace: true,
+                  removeRedundantAttributes: true,
+                  useShortDoctype: true,
+                  removeEmptyAttributes: true,
+                  removeStyleLinkTypeAttributes: true,
+                  keepClosingSlash: true,
+                  minifyJS: true,
+                  minifyCSS: true,
+                  minifyURLs: true,
+                },
+              }
+            : undefined
+        )
       ),
-    ]
+      isEnvProduction && new HtmlWebpackInlineSourcePlugin(HtmlWebPackPlugin),
+    ].filter(Boolean),
+    output: {
+      publicPath: "./"
+    }
   };
 }
