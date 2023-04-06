@@ -10,7 +10,7 @@ const List = ({traces, setTrace}) => {
     if(!Array.isArray(traces)) traces = [traces];
 
     const { SearchBar, ClearSearchButton } = Search;
-    const durationFormatter = (cell, row, rowIndex, formatExtraData) => { return row.trace ? (row.trace.spans.reduce((sum, span) => { return sum + span.time_ms }, 0)).toFixed(3) : "N/A" };
+    const durationFormatter = (cell, row, rowIndex, formatExtraData) => { return row.trace ? (row.trace.spans.reduce((sum, span) => { return sum + span.duration }, 0)).toFixed(3) : "N/A" };
     const spanCountFormatter = (cell, row, rowIndex, formatExtraData) => { return (row.trace ? row.trace.spans.length : 0) };
     const depthFormatter = (cell, row, rowIndex, formatExtraData) => { return (row.trace ? maxDepth(row.trace.spans) : 0) };
     const listViewactionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "list" }) } } className="btn btn-light">List View</button> };

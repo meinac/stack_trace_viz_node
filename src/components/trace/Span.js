@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import "./Span.css";
 import SpanList from "./SpanList.js"
-import ObjectTable from "./ObjectTable.js"
 import maxDepth from "./../../utils/maxDepth.js"
+import humanizeDuration from "./../../utils/humanizeDuration.js"
 
 const exceptionVisualizer = (exception) => {
   if(exception === null) return "N/A";
 
-  return (
-    <table>
-      <tr><td className="nested-table-key">Message:</td><td>{exception.message}</td></tr>
-      <tr><td className="nested-table-key">Backtrace:</td><td>{exception.backtrace}</td></tr>
-    </table>
-  );
+  return exception;
 }
 
 const argumentVisularizer = (key, value) => {
@@ -22,6 +17,8 @@ const argumentVisularizer = (key, value) => {
 }
 
 const argsVisularizer = (args) => {
+  if(typeof args === "undefined") return;
+
   return (<table>{Object.keys(args).map((key, index) => { return argumentVisularizer(key, args[key]) })}</table>);
 }
 
@@ -41,7 +38,7 @@ const Span = ({ span, level }) => {
   const switchDetails = () => { setShowDetails(!showDetails) }
 
   return (
-    <li className={span.exception === null ? "success" : "exception"}>
+    <li className={(typeof span.exception === "undefined" || span.exception === null) ? "success" : "exception"}>
       <div className="span-info" style={paddingStyle}>
         <div className="span-basic">
           <button
@@ -57,16 +54,13 @@ const Span = ({ span, level }) => {
         <div className="span-details" style={spanDetailsStyle}>
           <table>
             <tr>
-              <td className="detail-key" valign="top">Time Taken:</td><td>{span.time}</td>
-            </tr>
-            <tr>
-              <td className="detail-key" valign="top">Objects Count:</td><td><ObjectTable objectCounts={span.object_counts}/></td>
+              <td className="detail-key" valign="top">Time Taken:</td><td>{humanizeDuration(span.duration)}</td>
             </tr>
             <tr>
               <td className="detail-key" valign="top">Arguments:</td><td>{argsVisularizer(span.arguments)}</td>
             </tr>
             <tr>
-              <td className="detail-key" valign="top">Value:</td><td>{span.value}</td>
+              <td className="detail-key" valign="top">Value:</td><td>{span.return_value}</td>
             </tr>
             <tr>
               <td className="detail-key" valign="top">Exception:</td><td>{exceptionVisualizer(span.exception)}</td>
