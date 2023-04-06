@@ -4,7 +4,6 @@ import "./ObjectMap.css"
 
 const ConstMap = ({ trace }) => {
   const constName = (span) => {
-    debugger;
     return span.defined_class.startsWith("#") ? span.receiver : span.defined_class;
   }
 

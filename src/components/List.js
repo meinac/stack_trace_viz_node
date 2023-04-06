@@ -4,13 +4,14 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit/dist/rea
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "./List.css"
 import maxDepth from "./../utils/maxDepth.js"
+import humanizeDuration from "./../utils/humanizeDuration.js"
 
 const List = ({traces, setTrace}) => {
   if(traces !== null) {
     if(!Array.isArray(traces)) traces = [traces];
 
     const { SearchBar, ClearSearchButton } = Search;
-    const durationFormatter = (cell, row, rowIndex, formatExtraData) => { return row.trace ? (row.trace.spans.reduce((sum, span) => { return sum + span.duration }, 0)).toFixed(3) : "N/A" };
+    const durationFormatter = (cell, row, rowIndex, formatExtraData) => { return row.trace ? humanizeDuration((row.trace.spans.reduce((sum, span) => { return sum + span.duration }, 0)).toFixed(1)) : "N/A" };
     const spanCountFormatter = (cell, row, rowIndex, formatExtraData) => { return (row.trace ? row.trace.spans.length : 0) };
     const depthFormatter = (cell, row, rowIndex, formatExtraData) => { return (row.trace ? maxDepth(row.trace.spans) : 0) };
     const listViewactionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "list" }) } } className="btn btn-light">List View</button> };
