@@ -4,7 +4,7 @@ import "./ObjectMap.css"
 
 const ConstMap = ({ trace }) => {
   const constName = (span) => {
-    return span.defined_class.startsWith("#") ? span.receiver : span.defined_class;
+    return span.defined_class.startsWith("#") ? span.receiver : span.self_class;
   }
 
   const getLines = (from, spans, memo) => {
