@@ -19,7 +19,7 @@ const ObjectMap = ({ trace }) => {
   const lines = getLines(null, trace.spans);
 
   if(lines.length > 0) {
-    const dotSrc = `digraph {${getLines(null, trace.spans).join("; ")}}`;
+    const dotSrc = `digraph {${lines.join("; ")}}`;
     const options = {
       fit: true,
       height: 500,
