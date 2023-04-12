@@ -68,7 +68,9 @@ const Span = ({ span, level }) => {
           </table>
         </div>
       </div>
-      <div className="nested-spans" style={nestedSpansStyle}><SpanList trace={span} level={level + 1}/></div>
+      {showNested &&
+        (<div className="nested-spans" style={nestedSpansStyle}><SpanList trace={span} level={level + 1}/></div>)
+      }
     </li>
   );
 };
