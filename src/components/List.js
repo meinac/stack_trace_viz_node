@@ -17,6 +17,7 @@ const List = ({traces, setTrace}) => {
     const listViewactionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "list" }) } } className="btn btn-light">List View</button> };
     const mapViewactionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "map" }) } } className="btn btn-light">Object Map View</button> };
     const constMapViewactionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "constMap" }) } } className="btn btn-light">Const Map View</button> };
+    const flameGraphViewActionFormatter = (cell, row, rowIndex, formatExtraData) => { return <button onClick={ () => { setTrace({ trace: row, view: "flameGraph" }) } } className="btn btn-light">Flame Graph View</button> };
 
     const columns = [
       {
@@ -76,6 +77,13 @@ const List = ({traces, setTrace}) => {
         dataField: "",
         text: "",
         formatter: constMapViewactionFormatter,
+        headerStyle: (colum, colIndex) => {
+          return { width: "80px", textAlign: "center" };
+        }
+      }, {
+        dataField: "",
+        text: "",
+        formatter: flameGraphViewActionFormatter,
         headerStyle: (colum, colIndex) => {
           return { width: "80px", textAlign: "center" };
         }
