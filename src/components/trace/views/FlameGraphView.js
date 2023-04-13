@@ -1,5 +1,6 @@
 import React from "react";
 import "./../../Trace.css"
+import humanizeSpan from "./../../../utils/humanizeSpan.js"
 import TraceCard from "./../TraceCard"
 import FlameGraph from "./FlameGraph"
 
@@ -42,7 +43,7 @@ const flameGraphData = (spans) => {
 
   return mergeSpans(spans).flatMap((span) => {
     const children = flameGraphData(span.spans);
-    const data = { name: `${span.self_class} ${span.method_name}`, value: span.duration, children: children };
+    const data = { name: humanizeSpan(span), value: span.duration, children: children };
 
     return data;
   });
@@ -55,7 +56,10 @@ const totalDuration = (trace) => {
 };
 
 const FlameGraphView = ({ trace, goBack }) => {
-  const data = { children: flameGraphData(trace.trace.spans), name: "root", value: totalDuration(trace.trace) };
+  const traceStr = JSON.stringify(trace.trace);
+  const traceDup = JSON.parse(traceStr);
+
+  const data = { children: flameGraphData(traceDup.spans), name: "root", value: totalDuration(traceDup) };
 
   return (
     <div>
